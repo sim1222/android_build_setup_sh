@@ -30,4 +30,4 @@ fallocate -l 16G /swap.img
 mkswap /swap.img
 swapon /swap.img
 
-echo "done. Copy build.sh to android dir and run.
+echo "done. Copy build.sh to android dir and run."
