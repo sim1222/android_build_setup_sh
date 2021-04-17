@@ -4,8 +4,10 @@ echo -e "/n"
 echo "Installing some packages...(and delete old jdk...)"
 sudo apt-get update
 sudo apt-get purge openjdk-* -y
-sudo apt-get purge icedtea-* icedtea6-* -y
-sudo apt-get install bison g++-multilib git gperf libxml2-utils make zlib1g-dev:i386 zip liblz4-tool libncurses5 libssl-dev bc flex openjdk-8-jdk python ccache -y
+sudo apt-get purge icedtea-* -y
+sudo apt-get purge icedtea6-* -y
+sudo apt-get install bison g++-multilib git gperf libxml2-utils make zlib1g-dev:i386 zip liblz4-tool libncurses5 libssl-dev bc flex openjdk-11-jdk python ccache -y
+sudo apt install bc bison build-essential ccache curl flex g++-multilib gcc-multilib git gnupg gperf imagemagick lib32ncurses5-dev lib32readline-dev lib32z1-dev liblz4-tool libncurses5-dev libsdl1.2-dev libssl-dev libwxgtk3.0-dev libxml2 libxml2-utils lzop pngcrush rsync schedtool squashfs-tools xsltproc zip zlib1g-dev python
 java -version
 
 echo "Setting repo and ccache..."
@@ -29,5 +31,6 @@ rm /swap.img
 fallocate -l 16G /swap.img
 mkswap /swap.img
 swapon /swap.img
+souece ~/.bashrc
 
 echo "done. Copy build.sh to android dir and run."
