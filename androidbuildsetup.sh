@@ -1,21 +1,34 @@
 #!/bin/sh
 echo "Android build setup sh for ubuntu 20.04"
 echo -e "/n"
+
+echo "Download platformtools..."
+wget https://dl.google.com/android/repository/platform-tools-latest-linux.zip
+unzip platform-tools-latest-linux.zip -d ~
+{
+echo "# add Android SDK platform tools to path"
+echo "if [ -d "$HOME/platform-tools" ] ; then"
+echo "    PATH="$HOME/platform-tools:$PATH""
+echo "fi"
+} >> ~/.profile
+source ~/.profile
+
 echo "Installing some packages...(and delete old jdk...)"
 sudo apt update
-sudo apt-get purge openjdk-* -y
-sudo apt-get purge icedtea-* -y
-sudo apt-get purge icedtea6-* -y
+sudo apt-get purge openjdk-* icedtea-* icedtea6-* -y
 sudo apt install bison g++-multilib git gperf libxml2-utils make zlib1g-dev:i386 zip liblz4-tool libncurses5 libssl-dev bc flex openjdk-11-jdk python ccache -y
+sudo apt-get install bison g++-multilib git gperf libxml2-utils make zlib1g-dev:i386 zip liblz4-tool libncurses5 libssl-dev bc flex -y
 sudo apt install bc bison build-essential ccache curl flex g++-multilib gcc-multilib git gnupg gperf imagemagick lib32ncurses5-dev lib32readline-dev lib32z1-dev liblz4-tool libncurses5-dev libsdl1.2-dev libssl-dev libwxgtk3.0-gtk3-dev libxml2 libxml2-utils lzop pngcrush rsync schedtool squashfs-tools xsltproc zip zlib1g-dev python
 java -version
 
-echo "Setting repo and ccache..."
-mkdir ~/bin
-curl http://commondatastorage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
-chmod a+x ~/bin/repo
+cd ~/
+git clone https://github.com/akhilnarang/scripts
+cd scripts
+./setup/android_build_env.sh
+
+
+echo "Setting ccache..."
 {
-echo "export PATH=~/bin:$PATH" 
 echo "export USE_CCACHE=1"
 echo "export CCACHE_COMPRESS=1"
 } >> ~/.bashrc
