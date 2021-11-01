@@ -1,5 +1,5 @@
 #!/bin/sh
-echo "Android build setup sh for ubuntu 20.04"
+echo "Android build setup sh for ubuntu 18.04"
 echo -e "/n"
 
 echo "Installing some packages...(and delete old jdk...)"
